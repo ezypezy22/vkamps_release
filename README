@@ -1,60 +1,32 @@
-## 0.17beta
+Changelog: 0.14 → 0.17beta
+0.17beta
+Enhancements
 
-### Enhancements
-- Hardened the TCP/UDP transport: OS-level TCP keepalive to catch a silently
-  dropped connection faster, exponential backoff on repeated UDP telemetry
-  failures (was retrying every 1s forever), and UDP telemetry now verifies
-  it's actually the amp sending the data before displaying it.
-- Added rolling p50/p95 logging for command-confirm round-trip time and
-  telemetry frame cadence, to support future tuning decisions with real
-  numbers instead of guesses.
+Hardened the TCP/UDP transport: OS-level TCP keepalive to catch a silently dropped connection faster, exponential backoff on repeated UDP telemetry failures (was retrying every 1s forever), and UDP telemetry now verifies it's actually the amp sending the data before displaying it.
+Added rolling p50/p95 logging for command-confirm round-trip time and telemetry frame cadence, to support future tuning decisions with real numbers instead of guesses.
+Changed
 
-### Changed
-- Removed the bundled Npcap driver installer. Cold connects lose the
-  broadcast-ARP latency fix it enabled (falls back to the slower default
-  ARP path, ~15-18s worst case) but the installer no longer silently
-  installs a third-party network driver.
+Removed the bundled Npcap driver installer. Cold connects lose the broadcast-ARP latency fix it enabled (falls back to the slower default ARP path, ~15-18s worst case) but the installer no longer silently installs a third-party network driver.
+0.16beta
+Enhancements
 
-## 0.16beta
+Compact view redesigned: Reflected/Drive/Current moved into the Forward Power card as compact mini-gauges, antenna buttons relocated into the same row, and the window now locks to an exact-fit size instead of leaving dead space from a stale saved geometry.
+Topbar now follows the selected theme (light/dark/colorblind/high-contrast) instead of always rendering as a fixed dark bar.
+First-run Setup dialog's serial connection field replaced with a detected-COM-ports dropdown (plus rescan), instead of typing a port name blind.
+Added Report a Bug / Request a Feature buttons under Setup > Diagnostics, pre-filled with app version and connection type.
+Trimmed scapy's import cost in the startup ARP-priming path (~180ms faster app launch, measured).
+Bug Fixes
 
-### Enhancements
-- Compact view redesigned: Reflected/Drive/Current moved into the Forward
-  Power card as compact mini-gauges, antenna buttons relocated into the
-  same row, and the window now locks to an exact-fit size instead of
-  leaving dead space from a stale saved geometry.
-- Topbar now follows the selected theme (light/dark/colorblind/high-
-  contrast) instead of always rendering as a fixed dark bar.
-- First-run Setup dialog's serial connection field replaced with a
-  detected-COM-ports dropdown (plus rescan), instead of typing a port
-  name blind.
-- Added Report a Bug / Request a Feature buttons under Setup > Diagnostics,
-  pre-filled with app version and connection type.
-- Trimmed scapy's import cost in the startup ARP-priming path (~180ms
-  faster app launch, measured).
+Fixed Compact-view text clipping/squeezing at text-scale settings above the default (antenna/band label and meter value boxes).
+Fixed inconsistent lowercase "w" units on Reflected/Drive tiles.
+Fixed a CSS comment accidentally closed early by its own content, which had been silently dropping the entire light-theme variable block.
+Fixed three hover states that were invisible against the new light-theme topbar.
+Fixed compiler.iss having a hardcoded developer-machine path, which made the installer fail to build on any other machine.
+0.15beta
+Enhancements
 
-### Bug Fixes
-- Fixed Compact-view text clipping/squeezing at text-scale settings above
-  the default (antenna/band label and meter value boxes).
-- Fixed inconsistent lowercase "w" units on Reflected/Drive tiles.
-- Fixed a CSS comment accidentally closed early by its own content, which
-  had been silently dropping the entire light-theme variable block.
-- Fixed three hover states that were invisible against the new light-theme
-  topbar.
-- Fixed compiler.iss having a hardcoded developer-machine path, which made
-  the installer fail to build on any other machine.
+Reduced redundant JSON encoding in the WebSocket broadcast path (status/telemetry events were being encoded twice per event, then re-encoded again per connected client) - fewer encode passes on the hot path that fires on every status reply and multiple times per second during TX.
+Bug Fixes
 
-## 0.15beta
-
-### Enhancements
-- Reduced redundant JSON encoding in the WebSocket broadcast path (status/
-  telemetry events were being encoded twice per event, then re-encoded
-  again per connected client) - fewer encode passes on the hot path that
-  fires on every status reply and multiple times per second during TX.
-
-### Bug Fixes
-- Fixed a live telemetry timestamp mismatch: the value shown live and the
-  value later replayed from history could disagree because each encoding
-  pass independently sampled the clock.
-- Hardened WINUSB cleanup on a failed connect (removed a redundant/riskier
-  interface-release call that could mask the real error) and fixed a
-  Windows build incorrectly checking for a Linux-only timeout error code.
+Fixed a live telemetry timestamp mismatch: the value shown live and the value later replayed from history could disagree because each encoding pass independently sampled the clock.
+Hardened WINUSB cleanup on a failed connect (removed a redundant/riskier interface-release call that could mask the real error) and fixed a Windows build incorrectly checking for a Linux-only timeout error code.
