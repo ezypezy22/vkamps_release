@@ -1,3 +1,18 @@
+** Changelog: 0.18beta → 0.20beta (current)
+
+Bug Fixes
+Fixed Voltage/Temp tiles wrapping and misalignment in Compact view — the "V" unit was wrapping onto its own line, and the label/value weren't centered together. Both fixed and verified against the real running app.
+Fixed a multi-second delay in the power meter after stopping and restarting TX. This took several rounds to fully run down:
+Telemetry now re-registers immediately the instant a fresh transmission is detected, instead of waiting on a slow independent timer.
+Found and fixed the real bottleneck: the app was only checking the amp's status once every 15 seconds during idle gaps, so a restart could go unnoticed for up to 15s. Dropped to 1 second.
+Hardened the telemetry retrigger against packet loss on lossy links (VPNs in particular) — bursts a few quick resends instead of one, and tightened socket timing that was silently adding up to 0.5s of its own delay.
+Final root-cause fix, based on direct video comparison against another independent app: the periodic telemetry refresh interval was still too conservative. Dropped from 1.5s down to 0.3s, closing the gap much further.
+Fixed the "ON AIR stuck" display bug. ON AIR was actually clearing correctly, but the Peak/VSWR/Reflected/Drive/Current readings were staying non-zero for however long the Peak Hold Duration slider was set to — sometimes up to 60 seconds — making it look like the amp was still transmitting. The live readings now always clear in lockstep with ON AIR, completely independent of the Peak Hold slider; only the Peak number itself still respects that slider, since that's what it's actually for.
+
+** Enhancements / Adjustments
+Reduced the default/minimum Peak Hold Duration twice by direct request: 17s → 10s → 5s.
+
+
 0.18beta Release Notes (Latest - ping me for the binaries)
 Bug Fixes
 
