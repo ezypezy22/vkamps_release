@@ -1,5 +1,5 @@
 Changelog: 0.14 → 0.17beta
-0.17beta
+0.17beta (please msg me for a binary)
 Enhancements
 
 Hardened the TCP/UDP transport: OS-level TCP keepalive to catch a silently dropped connection faster, exponential backoff on repeated UDP telemetry failures (was retrying every 1s forever), and UDP telemetry now verifies it's actually the amp sending the data before displaying it.
