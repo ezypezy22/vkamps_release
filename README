@@ -1,5 +1,16 @@
-Changelog: 0.14 → 0.17beta
-0.17beta (please msg me for a binary)
+0.18beta Release Notes (Latest - ping me for the binaries)
+Bug Fixes
+
+Fixed Compact view forcing a ~20px dead-space gap at the bottom of the window. The window's minimum-height floor was set slightly above Compact's actual content height, so the window could never shrink all the way to fit — now it locks to its true content size with no forced gap.
+Fixed a startup error where the app's screen-height detection silently failed on every launch (a pywebview API change), causing "fit to content" windows to fall back to an oversized guess instead of the real screen size.
+Enhancements
+
+Tightened remaining Compact-view spacing: reduced side padding and bottom margins further now that the window fits its content exactly, for a noticeably more compact layout.
+Removed the redundant "VK3AMP" text label from the topbar — the logo already displays the name, so the separate heading was unnecessary duplication. The "Handcrafted in Australia" tagline and version number remain.
+All three layout/spacing fixes were verified live against the real running app (via WebView2 remote debugging) before shipping, confirming no regressions in wrapping, overflow, or window sizing.
+
+
+0.17beta
 Enhancements
 
 Hardened the TCP/UDP transport: OS-level TCP keepalive to catch a silently dropped connection faster, exponential backoff on repeated UDP telemetry failures (was retrying every 1s forever), and UDP telemetry now verifies it's actually the amp sending the data before displaying it.
