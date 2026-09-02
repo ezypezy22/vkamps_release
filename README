@@ -1,4 +1,24 @@
-** Changelog: 0.18beta → 0.20beta (current)
+VK-AMPS Control — Enhancements & Bug Fixes (0.20beta → 0.30beta)
+Enhancements
+
+New Vertical dashboard layout — a third view mode alongside Compact/Expert for docking down one side of a screen; later redesigned to match a minimalist reference mockup (always-visible ON AIR/LINK status row, single-line Peak/VSWR, seamless Reflected/Drive/Current card, unified Voltage/Temp card, thinner Forward Power bar).
+Compact/Vertical/Expert selector collapsed into a single "View Mode" dropdown, replacing the three-button topbar toggle to cut clutter.
+Expert view reorganized — Antenna's port buttons and the voltage-rail choice (Low ~41V / High ~58V) folded into the Forward Power card as a 2×2 grid with Temp/Voltage (Temp on top, voltage-rail choice beside Temp, Antenna beside Voltage), freeing the sidebar for a bigger Power History chart. Antenna's old standalone card/pop-out was retired as part of the move. Rail buttons now read "Voltage Low"/"Voltage High" and are sized to match the Temp tile.
+Mini-HUD/Setup buttons show real text labels ("Mini-HUD", "Setup") instead of bare icons once relocated into the Vertical view's overflow menu, matching the other listed items there.
+Bug Fixes
+
+Fixed Compact's close button getting clipped off-window when the connection state was RECONNECTING (the widest status string, which the window hadn't reserved room for).
+Fixed Vertical's Current tile getting clipped off the bottom of the window on 1080p screens; tightened overall height.
+Fixed Vertical's antenna buttons not actually filling their row (a flex-parent sizing bug left them bunched left with dead space).
+Fixed the window staying oversized after switching Vertical → Compact via the View Mode dropdown — traced to a one-frame race only reproducible through a real (not synthetic) <select> interaction.
+Fixed Mini-HUD's popup showing a dead gap when opened while Vertical was active (a CSS rule meant only for the main dashboard was leaking into the popped-out panel).
+Fixed spurious scrollbars appearing in Expert view from an exact-pixel-boundary auto-fit, and a collapsed/garbled Power History chart axis when no data had loaded yet.
+Fixed Power History leaving a dead-space gap below the chart in Expert view (tried stretching to match the sidebar first; that just relocated the gap, so the chart's own minimum height was raised instead).
+Also: ON AIR/live-meter debounce decoupled from Peak Hold Duration and lowered to 1s for faster clearing after a real TX stop (direct tradeoff against the amp's own tx-flag flicker risk).
+
+
+
+0.18beta → 0.20beta (current)
 
 Bug Fixes
 Fixed Voltage/Temp tiles wrapping and misalignment in Compact view — the "V" unit was wrapping onto its own line, and the label/value weren't centered together. Both fixed and verified against the real running app.
