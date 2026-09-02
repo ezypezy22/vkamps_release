@@ -1,11 +1,15 @@
 VK-AMPS Control — Enhancements & Bug Fixes (0.20beta → 0.30beta)
-Enhancements
+
+
+*** Enhancements ***
 
 New Vertical dashboard layout — a third view mode alongside Compact/Expert for docking down one side of a screen; later redesigned to match a minimalist reference mockup (always-visible ON AIR/LINK status row, single-line Peak/VSWR, seamless Reflected/Drive/Current card, unified Voltage/Temp card, thinner Forward Power bar).
 Compact/Vertical/Expert selector collapsed into a single "View Mode" dropdown, replacing the three-button topbar toggle to cut clutter.
 Expert view reorganized — Antenna's port buttons and the voltage-rail choice (Low ~41V / High ~58V) folded into the Forward Power card as a 2×2 grid with Temp/Voltage (Temp on top, voltage-rail choice beside Temp, Antenna beside Voltage), freeing the sidebar for a bigger Power History chart. Antenna's old standalone card/pop-out was retired as part of the move. Rail buttons now read "Voltage Low"/"Voltage High" and are sized to match the Temp tile.
 Mini-HUD/Setup buttons show real text labels ("Mini-HUD", "Setup") instead of bare icons once relocated into the Vertical view's overflow menu, matching the other listed items there.
-Bug Fixes
+
+
+*** Bug Fixes *** 
 
 Fixed Compact's close button getting clipped off-window when the connection state was RECONNECTING (the widest status string, which the window hadn't reserved room for).
 Fixed Vertical's Current tile getting clipped off the bottom of the window on 1080p screens; tightened overall height.
