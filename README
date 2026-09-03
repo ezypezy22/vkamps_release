@@ -1,4 +1,17 @@
-VK-AMPS Control — Enhancements & Bug Fixes (0.33beta)
+VK-AMPS Control — Enhancements & Bug Fixes (0.34beta - current)
+
+Added a "Peak hold" checkbox to the main dashboard (Peak card, all three view modes). Unchecked, the Peak number tracks the live output in real time instead of holding the highest reading since the last transmission; the existing Setup "Peak Hold Duration" slider still governs the held-mode timeout. Preference persists and travels with exported/imported settings.
+Bugfixes
+
+Setup dialog now opens at a comfortable size in Compact too, not just Vertical (commit 09f5494) — previously it could render squeezed into Compact's small locked window, same problem Vertical already had fixed.
+Fixed the new Peak hold checkbox misaligning Peak's number against VSWR's in Compact/Expert (a side effect of the checkbox's first placement).
+Fixed a related Expert-mode regression where that same misalignment fix made the Peak card grow, which — because Forward Power's height derives from Peak/VSWR's row in the grid layout — grew the whole window's required height and left spurious scrollbars on an already-open window.
+-----------------
+
+
+
+
+(0.33beta)
 
 Enhancement
 
