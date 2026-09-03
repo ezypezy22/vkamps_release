@@ -1,5 +1,11 @@
-VK-AMPS Control — Enhancements & Bug Fixes (0.20beta → 0.32beta)
+VK-AMPS Control — Enhancements & Bug Fixes (0.33beta)
 
+Enhancement
+
+Vertical view: the Operate/Bypass pill is now always visible in the status row next to ON AIR (previously tucked behind the "⋮" menu) — swapped places with the LINK pill, which moved into that "⋮" menu instead. Reasoning: Operate is the more consequential control day-to-day (whether the amp will actually amplify right now), so it shouldn't require an extra click to reach.
+
+
+(0.32)
 
 *** Enhancements ***
 
