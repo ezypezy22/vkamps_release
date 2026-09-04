@@ -1,4 +1,21 @@
-VK-AMPS Control — Enhancements & Bug Fixes (0.34beta - current)
+VK-AMPS Control — Enhancements & Bug Fixes
+Since 0.34beta (now at 0.37beta)
+
++++ Bugfixes
+
+Peak hold-off snapping to 0 and back mid-transmission. The live-tracking number was mirroring the Forward Power bar's own near-raw value, so any brief gap made it slam to 0 and jump back instead of moving smoothly.
+
+ON AIR / live Peak falsely going idle during a status-flag flicker. The amp's tx status flag is already known to flicker false for several seconds even mid-transmission. Two of three internal timers weren't checking telemetry before declaring idle, so a real, unbroken transmission could still show ON AIR going dark and Peak dropping to 0 for a moment. Confirmed via a Wireshark capture that telemetry itself was clean the whole time — this was purely a frontend timing bug.
+
+Peak still lagging visibly after hold is turned off. Even with the false-clear bug fixed, a genuine drop in output took ~600-800ms to visually settle to 0, reading like lingering hold behavior. Now settles in about half the time on the way down (climbing is unchanged).
+
+Removed ~94 lines of dead code found during an audit: an unused CSS selector, 7 unused theme color variables, two orphaned JS functions (Meters.isTxActive, Charts.resetHistory), and an unused Python property + its backing table (Status.error_description / ERROR_CODE_NAMES) — the frontend already had its own active copy of that data.
+
++++ Enhancements
+
+(carried over from the last list, already reported: the Peak hold toggle itself.) No new user-facing enhancements this round — this whole stretch was diagnosing and fixing the Peak-hold-off behavior end to end.
+
+(0.34beta)
 
 Added a "Peak hold" checkbox to the main dashboard (Peak card, all three view modes). Unchecked, the Peak number tracks the live output in real time instead of holding the highest reading since the last transmission; the existing Setup "Peak Hold Duration" slider still governs the held-mode timeout. Preference persists and travels with exported/imported settings.
 Bugfixes
